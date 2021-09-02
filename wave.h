@@ -14,13 +14,13 @@ const float PI = 3.14;
 **/
 class wave
 {
-  protected:
-    string name;
+    protected:
+        string name;
 
-  public:
-    SoundSamples * generateSamples (float freqency, float sampleRate, float duration);
+    public:
+        SoundSamples * generateSamples (float freqency, float sampleRate, float duration);
 
-    virtual float generateFunction (float time) = 0;
+        virtual float generateFunction (float time) = 0;
 };
 
 /**
@@ -28,16 +28,16 @@ class wave
 **/
 class SineWave : public wave
 {
-  public:
-    SineWave (string _name)
-    {
-      this->name = _name;
-    }
+    public:
+        SineWave (string _name)
+        {
+            this->name = _name;
+        }
 
-    float generateFunction (float time)
-    {
-      return sin (2 * PI * time);
-    }
+        float generateFunction (float time)
+        {
+            return sin (2 * PI * time);
+        }
 };
 
 /**
@@ -45,17 +45,17 @@ class SineWave : public wave
 **/
 class SquareWave : public wave
 {
-  public:
-    SquareWave (string _name)
-    {
-      this->name = _name;
-    }
+    public:
+        SquareWave (string _name)
+        {
+            this->name = _name;
+        }
 
-    float generateFunction (float time)
-    {
-      if (sin (2 * PI * time) >= 0) return 1.0;
-      else return -1.0;
-    }
+        float generateFunction (float time)
+        {
+            if (sin (2 * PI * time) >= 0) return 1.0;
+            else return -1.0;
+        }
 };
 
 /**
@@ -63,16 +63,16 @@ class SquareWave : public wave
 **/
 class TriangleWave : public wave
 {
-  public:
-    TriangleWave (string _name)
-    {
-      this->name = _name;
-    }
+    public:
+        TriangleWave (string _name)
+        {
+            this->name = _name;
+        }
 
-    float generateFunction (float time)
-    {
-      return (2 / PI) * asin (sin (2 * PI * time));
-    }
+        float generateFunction (float time)
+        {
+            return (2 / PI) * asin (sin (2 * PI * time));
+        }
 };
 
 /**
@@ -80,14 +80,14 @@ class TriangleWave : public wave
 **/
 class SawtoothWave : public wave
 {
-  public:
-    SawtoothWave (string _name)
-    {
-      this->name = _name;
-    }
+    public:
+        SawtoothWave (string _name)
+        {
+            this->name = _name;
+        }
 
-    float generateFunction (float time)
-    {
-      return -(2 / PI) * atan (1 / (tan (PI * time)));
-    }
+        float generateFunction (float time)
+        {
+            return -(2 / PI) * atan (1 / (tan (PI * time)));
+        }
 };

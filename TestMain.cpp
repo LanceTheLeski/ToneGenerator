@@ -13,122 +13,106 @@ using namespace std;
 **/
 int main() 
 {
-  string name;
-  int typeWave;
+    string name;
+    int typeWave;
 
-  float delay;
-  float att;
-  float atime;
-  float alevel;
-  float dtime;
-  float slevel;
-  float rtime;
+    float delay;
+    float att;
+    float atime;
+    float alevel;
+    float dtime;
+    float slevel;
+    float rtime;
 
-  float sampleRate;
-  float frequency;
-  float duration;
+    float sampleRate;
+    float frequency;
+    float duration;
 
-  cout << "Type the number that corresponds to the wave you want (1=sine; 2=square; 3=triangle; 4=sawtooth):\n";
+    cout << "Type the number that corresponds to the wave you want (1=sine; 2=square; 3=triangle; 4=sawtooth):\n";
   
-  cin >> typeWave;
+    cin >> typeWave;
 
-  cout << "Type a delay:\n";
+    cout << "Type a delay:\n";
 
-  cin >> delay;
+    cin >> delay;
 
-  cout << "Type a attenuation:\n";
+    cout << "Type a attenuation:\n";
 
-  cin >> att;
+    cin >> att;
 
-  cout << "Type the attack time (atime):\n";
+    cout << "Type the attack time (atime):\n";
 
-  cin >> atime;
+    cin >> atime;
 
-  cout << "Type the attack level (alevel):\n";
+    cout << "Type the attack level (alevel):\n";
 
-  cin >> alevel;
+    cin >> alevel;
 
-  cout << "Type the decay time (dtime):\n";
+    cout << "Type the decay time (dtime):\n";
 
-  cin >> dtime;
+    cin >> dtime;
 
-  cout << "Type the sustaine level (slevel):\n";
+    cout << "Type the sustaine level (slevel):\n";
 
-  cin >> slevel;
+    cin >> slevel;
 
-  cout << "Type the release time (rtime):\n";
+    cout << "Type the release time (rtime):\n";
 
-  cin >> rtime;
+    cin >> rtime;
 
-  cout << "Type a name for the output file:\n";
+    cout << "Type a name for the output file:\n";
 
-  cin >> name;
+    cin >> name;
 
-  wave *w;
+    wave *w;
 
-  if (typeWave == 1)
-  {
-    w = new SineWave (name);
-  }
-  else if (typeWave == 2)
-  {
-    w = new SquareWave (name);
-  }
-  else if (typeWave == 3)
-  {
-    w = new TriangleWave (name);
-  }
-  else if (typeWave == 4)
-  {
-    w = new SawtoothWave (name);
-  }
-  else
-  {
-    cerr << "Your wave number is invalid..\n";
-    return 0;
-  }
+    if (typeWave == 1)
+    {
+        w = new SineWave (name);
+    }
+    else if (typeWave == 2)
+    {
+        w = new SquareWave (name);
+    }
+    else if (typeWave == 3)
+    {
+        w = new TriangleWave (name);
+    }
+    else if (typeWave == 4)
+    {
+        w = new SawtoothWave (name);
+    }
+    else
+    {
+        cerr << "Your wave number is invalid..\n";
+        return 0;
+    }
 
-  //get keys and calculate SoundSamples
+    //get keys and calculate SoundSamples
 
-  //SoundSamples * s = NULL;
-  SoundSamples pause = SoundSamples (.25 * sampleRate, sampleRate);
-  sampleRate = 44100;
-  duration = 1;
+    //SoundSamples * s = NULL;
+    SoundSamples pause = SoundSamples (.25 * sampleRate, sampleRate);
+    sampleRate = 44100;
+    duration = 1;
 
-  int key;
+    int key;
 
-  cout << "Type set of keys:\n";
-
-  cin >> key;
-
-  while (key >= 0)
-  {
-    frequency = 440 * pow (2, ((key - 49)/12));
-
-    SoundSamples * n = w->generateSamples (frequency, sampleRate, duration);
-    n->reverb2 (delay, att);
-
-    soundio :: OutputSound (n, name);
-    soundio :: OutputSound (&pause, name);
+    cout << "Type set of keys:\n";
 
     cin >> key;
-  }
 
-  //SoundSamples * s = w->generateSamples (frequency, sampleRate, duration);
+    while (key >= 0)
+    {
+        frequency = 440 * pow (2, ((key - 49)/12));
 
-  //soundio :: OutputSound (s, name);
+        SoundSamples * n = w->generateSamples (frequency, sampleRate, duration);
+        n->reverb2 (delay, att);
 
-  return 0;
+        soundio :: OutputSound (n, name);
+        soundio :: OutputSound (&pause, name);
 
-  /*cout << "Type a sample rate:\n";
+        cin >> key;
+    }
 
-  cin >> sampleRate;
-
-  cout << "Type a frequency:\n";
-
-  cin >> frequency;
-
-  cout << "Type a duration:\n";
-
-  cin >> duration;*/
+    return 0;
 }

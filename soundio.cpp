@@ -8,15 +8,15 @@
 **/
 void soundio :: OutputSound (SoundSamples * samples, string filename)
 {
-  int i;
+    int i;
 
-  ofstream myFile;
-  myFile.open (filename + ".txt");
+    ofstream myFile;
+    myFile.open (filename + ".txt");
 
-  for (i = 0; i < samples->getLength (); i++)
-  {
-    myFile << (*samples) [i] << "\n";
-    cout << (*samples) [i] << "\n";
-  }
-  myFile.close ();
+    for (i = 0; i < samples->getLength (); i++)
+    {
+        myFile << (*samples) [i] << "\n";
+        cout << (*samples) [i] << "\n";
+    }
+    myFile.close ();
 }

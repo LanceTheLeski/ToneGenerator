@@ -7,6 +7,6 @@ using namespace std;
 
 class soundio
 {
-  public:
-    static void OutputSound (SoundSamples * samples, string filename);
+    public:
+        static void OutputSound (SoundSamples * samples, string filename);
 };

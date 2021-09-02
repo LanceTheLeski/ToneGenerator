@@ -6,15 +6,15 @@
 **/
 SoundSamples :: SoundSamples (float *_samples, int _length, float _sampleRate)
 {
-  int i;
-  //this->samples = _samples;
-  int size = _length;
-  float samps [size];
-  for (i = 0; i < _length; i++) samps [i] = _samples [i];
+    int i;
+    //this->samples = _samples;
+    int size = _length;
+    float samps [size];
+    for (i = 0; i < _length; i++) samps [i] = _samples [i];
 
-  this->samples = samps;
-  this->length = _length;
-  this->sampleRate = _sampleRate;
+    this->samples = samps;
+    this->length = _length;
+    this->sampleRate = _sampleRate;
 }
 
 /**
@@ -23,16 +23,16 @@ SoundSamples :: SoundSamples (float *_samples, int _length, float _sampleRate)
 **/
 SoundSamples :: SoundSamples (int _length, float _sampleRate)
 {
-  int i;
+    int i;
 
-  this->length = _length;
-  this->sampleRate = _sampleRate;
+    this->length = _length;
+    this->sampleRate = _sampleRate;
   
-  //create the silent samples:
-  int size = _length;
-  float samps [size];
-  for (i = 0; i < size; i++) samples [i] = 0;
-  this->samples = samps;
+    //create the silent samples:
+    int size = _length;
+    float samps [size];
+    for (i = 0; i < size; i++) samples [i] = 0;
+    this->samples = samps;
 }
 
 /**
@@ -42,18 +42,18 @@ SoundSamples :: SoundSamples (int _length, float _sampleRate)
 **/
 SoundSamples& SoundSamples :: operator= (const SoundSamples &orig)
 {
-  if (this != &orig)
-  {
-    delete this->samples;
+    if (this != &orig)
+    {
+        delete this->samples;
 
-    this->length = orig.length;
-    this->sampleRate = orig.sampleRate;
+        this->length = orig.length;
+        this->sampleRate = orig.sampleRate;
 
-    this->samples = new float;
-    *(this->samples) = *(orig.samples);
-  }
+        this->samples = new float;
+        *(this->samples) = *(orig.samples);
+    }
   
-  return *this;
+    return *this;
 }
 
 /**
@@ -63,15 +63,15 @@ SoundSamples& SoundSamples :: operator= (const SoundSamples &orig)
 **/
 bool SoundSamples :: operator== (const SoundSamples &s1/*, const SoundSamples &s2*/)
 {
-  int i;
+    int i;
 
-  bool same = true;
-  if (s1.length != this->length ) same = false;
-  if (s1.sampleRate != this->sampleRate) same = false;
-  for (i = 0; i < s1.length; i++)
-    if (s1.samples [i] != this->samples [i]) same = false;
+    bool same = true;
+    if (s1.length != this->length ) same = false;
+    if (s1.sampleRate != this->sampleRate) same = false;
+    for (i = 0; i < s1.length; i++)
+        if (s1.samples [i] != this->samples [i]) same = false;
 
-  return same;
+    return same;
 }
 
 /**
@@ -81,35 +81,35 @@ bool SoundSamples :: operator== (const SoundSamples &s1/*, const SoundSamples &s
 **/
 SoundSamples SoundSamples :: operator+ (SoundSamples s1/*, const SoundSamples s2*/)
 {
-  int i;
+    int i;
 
-  //SoundSamples add = s1;
-  //add.length += s2.length;
+    //SoundSamples add = s1;
+    //add.length += s2.length;
 
-  this->length += s1.length;
+    this->length += s1.length;
 
-  std::cout << "idk";
+    std::cout << "idk";
 
-  //const int size = add.length;
-  int size = this->length;
-  float samps [size];
-  for (i = 0; i < size; i++)
-  {
-    //if (i < (size - s2.length)) samps [i] = s1.samples [i];
-    if (i < (size - s1.length)) samps [i] = this->samples [i];
-    else samps [i] = s1.samples [i - (size - s1.length)];
-  }
+    //const int size = add.length;
+    int size = this->length;
+    float samps [size];
+    for (i = 0; i < size; i++)
+    {
+        //if (i < (size - s2.length)) samps [i] = s1.samples [i];
+        if (i < (size - s1.length)) samps [i] = this->samples [i];
+        else samps [i] = s1.samples [i - (size - s1.length)];
+    }
 
-  std::cout << "testp1";
+    std::cout << "testp1";
 
-  //add.samples = samps;
-  delete this->samples;
-  this->samples = samps;
+    //add.samples = samps;
+    delete this->samples;
+    this->samples = samps;
 
-  std::cout << "test";
+    std::cout << "test";
 
-  //return add;
-  return *this;
+    //return add;
+    return *this;
 }
 
 /**
@@ -118,7 +118,7 @@ SoundSamples SoundSamples :: operator+ (SoundSamples s1/*, const SoundSamples s2
 **/
 float SoundSamples :: getSampleRate ()
 {
-  return this->sampleRate;
+    return this->sampleRate;
 }
 
 /**
@@ -127,7 +127,7 @@ float SoundSamples :: getSampleRate ()
 **/
 int SoundSamples :: getLength ()
 {
-  return this->length;
+    return this->length;
 }
 
 /**
@@ -137,68 +137,68 @@ int SoundSamples :: getLength ()
 **/
 float & SoundSamples :: operator[] (int index)
 {
-  return samples [index];
+    return samples [index];
 }
 
 void SoundSamples :: reverb2 (float delay, float attenuation)
 {
-  int i;
+    int i;
 
-  if (delay < 0) 
-  {
-    std::cerr << "Error: delay value is less than zero\n";
-    return;
-  }
-  if (attenuation < 0)
-  {
-    std::cerr << "Error: attenuation value is less than zero\n";
-    return;
-  }
+    if (delay < 0) 
+    {
+        std::cerr << "Error: delay value is less than zero\n";
+        return;
+    }
+    if (attenuation < 0)
+    {
+        std::cerr << "Error: attenuation value is less than zero\n";
+        return;
+    }
 
-  int sdelay = this->sampleRate * delay;
+    int sdelay = this->sampleRate * delay;
 
-  int size = this->length;
-  float samps [size];
-  for (i = 0; i < size; i++)
-  {
-    //if (i < (size - s2.length)) samps [i] = s1.samples [i];
-    if (i < sdelay) samps [i] = this->samples [i];
-    else samps [i] = this->samples [i] + samps [i - sdelay] * attenuation;
-  }
+    int size = this->length;
+    float samps [size];
+    for (i = 0; i < size; i++)
+    {
+        //if (i < (size - s2.length)) samps [i] = s1.samples [i];
+        if (i < sdelay) samps [i] = this->samples [i];
+        else samps [i] = this->samples [i] + samps [i - sdelay] * attenuation;
+    }
 
-  this->samples = samps;
+    this->samples = samps;
 }
 
 void SoundSamples :: asdr (float atime, float alevel, float dtime, float slevel, float rtime)
 {
-  int i;
+    int i;
 
-  if (((atime * sampleRate) + (dtime * sampleRate) + (rtime * sampleRate)) > this->length) 
-  {
-    std::cerr << "Error: The three times given are greater then the duration of the sound sample currently defined\n";
-    return;
-  }
+    if (((atime * sampleRate) + (dtime * sampleRate) + (rtime * sampleRate)) > this->length) 
+    {
+        std::cerr << "Error: The three times given are greater then the duration of the sound sample currently defined\n";
+        return;
+    }
 
-  //y - y1 = m (x - x1)
+    //y - y1 = m (x - x1)
 
-  //m1: 0 - alevel(y) = m (0 - atime(x)) -> m = y / x
-  float m1 = alevel / atime;
+    //m1: 0 - alevel(y) = m (0 - atime(x)) -> m = y / x
+    float m1 = alevel / atime;
 
-  //m2: alevel - slevel(y) = m (atime - (atime + dtime)(x))
-  float m2 = (alevel - slevel) / (atime - (atime + dtime));
+    //m2: alevel - slevel(y) = m (atime - (atime + dtime)(x))
+    float m2 = (alevel - slevel) / (atime - (atime + dtime));
 
-  //m3: slevel - 0(y) = m ((totalDuration - rtime) - totalDuration(x))
-  float m3 = alevel / (((this->length / this->sampleRate) - rtime) - (this->length / this->sampleRate));
+    //m3: slevel - 0(y) = m ((totalDuration - rtime) - totalDuration(x))
+    float m3 = alevel / (((this->length / this->sampleRate) - rtime) - (this->length / this->sampleRate));
 
-  int size = this->length;
-  float samps [size];
-  for (i = 0; i < size; i++)
-  {
-    if (i < atime * sampleRate) samps [i] = this->samples [i] * m1;
-    else if (i < (atime * sampleRate) + (dtime * sampleRate)) samps [i] = this->samples [i] * (alevel - m2 * (atime * sampleRate - i));
-    else if (i < size - (rtime * sampleRate)) samps [i] = this->samples [i] * slevel;
-    else samps [i] = this->samples [i] * (slevel - m3 * (((size * sampleRate) - (rtime * sampleRate)) - i));
-  }
+    int size = this->length;
+    float samps [size];
+    for (i = 0; i < size; i++)
+    {
+        if (i < atime * sampleRate) samps [i] = this->samples [i] * m1;
+        else if (i < (atime * sampleRate) + (dtime * sampleRate)) samps [i] = this->samples [i] * (alevel - m2 * (atime * sampleRate - i));
+        else if (i < size - (rtime * sampleRate)) samps [i] = this->samples [i] * slevel;
+        else samps [i] = this->samples [i] * (slevel - m3 * (((size * sampleRate) - (rtime * sampleRate)) - i));
+    }
 
-  this->samples = samps;
+    this->samples = samps;
 }
